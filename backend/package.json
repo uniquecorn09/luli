@@ -1,0 +1,45 @@
+{
+    "name": "luli-backend",
+    "version": "0.1.0",
+    "description": "Backend service for Lucy's Tonie collection (Fastify + MongoDB)",
+    "main": "dist/server.js",
+    "scripts": {
+        "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+        "build": "tsc -p tsconfig.json",
+        "start": "node dist/server.js",
+        "lint": "eslint \"src/**/*.ts\" --max-warnings=0",
+        "format": "prettier --write \"src/**/*.ts\"",
+        "test": "jest --runInBand --detectOpenHandles",
+        "import-feed": "FEED_URL=https://api.prod.shop.tonies.com/api/product-feed?shopLocale=de_DE ts-node src/cli/import-feed.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "fastify": "^4.24.0",
+        "mongodb": "^6.4.0",
+        "mongoose": "^8.0.3",
+        "dotenv": "^16.4.1",
+        "axios": "^1.6.8",
+        "@fastify/jwt": "^8.0.0",
+        "bcryptjs": "^2.4.3",
+        "fastify-plugin": "^5.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.14",
+        "eslint": "^8.56.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-import": "^2.29.1",
+        "prettier": "^3.2.5",
+        "ts-node": "^10.9.2",
+        "ts-node-dev": "^2.0.0",
+        "typescript": "^5.3.3",
+        "@types/bcryptjs": "^2.4.2",
+        "jest": "^29.7.0",
+        "ts-jest": "^29.1.0",
+        "@types/jest": "^29.5.4",
+        "supertest": "^6.3.3",
+        "mongodb-memory-server": "^8.14.0",
+        "@types/supertest": "^2.0.12"
+    }
+}
