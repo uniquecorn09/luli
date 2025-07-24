@@ -1,3 +1,51 @@
 input {
   border-radius: 0px !important;
+}
+
+.desktop-only {
+  display: inline-block;
+}
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: inline-flex !important;
+    align-items: center;
+  }
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    background: #014023;
+    color: #F5FED7;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    width: 100vw;
+    z-index: 1000;
+    box-shadow: 0 2px 12px rgba(35, 64, 44, 0.10);
+    padding: 1rem 0;
+  }
+  .mobile-menu a {
+    color: #F5FED7 !important;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    text-align: left;
+    transition: background 0.2s;
+  }
+  .mobile-menu a:hover {
+    background: #1e6b3a;
+    color: #fff !important;
+  }
+  .menu-separator {
+    height: 1px;
+    width: 90%;
+    margin: 0.1rem auto 0.1rem auto;
+    background: rgba(245, 254, 215, 0.18);
+    border: none;
+  }
 }   

@@ -3,14 +3,7 @@
     type="text"
     [(ngModel)]="searchTerm"
     (keyup.enter)="onSearch()"
-    placeholder="Produkte suchen..."
-    style="
-      padding: 0.5em 1em;
-      border-radius: 2em;
-      border: 1px solid #ccc;
-      width: 250px;
-      margin-right: 0.5em;
-    "
+    placeholder="Tonie suchen..."
   />
   <button mat-stroked-button color="primary" (click)="onSearch()">
     Suchen
@@ -21,22 +14,16 @@
 
 <div class="product-grid" *ngIf="!loading && !error">
   <div class="product-card" *ngFor="let product of products">
-    <img
-      class="product-image"
-      [src]="product.imageUrl"
-      [alt]="product.name"
-      *ngIf="product.imageUrl"
-    />
+    <div class="product-image-box">
+      <img
+        class="product-image"
+        [src]="product.imageUrl"
+        [alt]="product.name"
+        *ngIf="product.imageUrl"
+      />
+    </div>
     <div class="product-title">
-      <a
-        [href]="product.productUrl"
-        target="_blank"
-        rel="noopener"
-        class="product-link"
-      >
-        {{ product.name }}
-        <span class="link-icon" aria-label="Produktseite öffnen"></span>
-      </a>
+      {{ product.name }}
       <div *ngIf="isOnWishlist(product.tonieId)" class="wishlist-flag">
         bereits auf Wunschliste
       </div>
@@ -54,6 +41,16 @@
           ? "Nicht verfügbar"
           : "Unbekannt"
       }}
+    </div>
+    <div style="margin-bottom: 0.5em">
+      <a
+        [href]="product.productUrl"
+        target="_blank"
+        rel="noopener"
+        class="product-link"
+      >
+        Zu Produkt ↗
+      </a>
     </div>
     <div class="product-actions">
       <button
@@ -84,11 +81,22 @@
   </div>
 </div>
 
-<div class="pagination" *ngIf="!loading && !error && totalPages > 1">
+<div class="sticky-footer" *ngIf="!loading && !error && totalPages > 1">
   <button mat-button (click)="prevPage()" [disabled]="currentPage === 1">
     Zurück
   </button>
-  <span>Seite {{ currentPage }} von {{ totalPages }}</span>
+  <span style="margin: 0 1em"
+    >Seite
+    <select [(ngModel)]="currentPage" (change)="onPageSelect($event)">
+      <option
+        *ngFor="let p of [].constructor(totalPages); let i = index"
+        [value]="i + 1"
+      >
+        {{ i + 1 }}
+      </option>
+    </select>
+    von {{ totalPages }}
+  </span>
   <button
     mat-button
     (click)="nextPage()"

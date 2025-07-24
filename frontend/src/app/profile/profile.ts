@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-profile',
-  imports: [],
+  imports: [MatGridListModule, MatCardModule, MatButtonModule],
   templateUrl: './profile.html',
   styleUrl: './profile.scss',
 })

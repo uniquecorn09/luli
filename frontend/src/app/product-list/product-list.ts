@@ -96,6 +96,13 @@ export class ProductListComponent implements OnInit {
     }
   }
 
+  onPageSelect(event: any) {
+    const page = Number(event.target.value);
+    if (page && page !== this.currentPage) {
+      this.loadProducts(page, false);
+    }
+  }
+
   addToWishlist(tonieId: string) {
     this.saveScrollPosition();
     this.productService.addToWishlist(tonieId).subscribe({
