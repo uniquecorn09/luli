@@ -14,8 +14,6 @@ export async function importFeed(
   feedUrl: string,
   limit = 100
 ): Promise<number> {
-  // Leere die Produktdatenbank vor dem Import
-  await ProductModel.deleteMany({});
   let page = 1;
   let upserted = 0;
   let totalFetched = 0;
@@ -30,6 +28,8 @@ export async function importFeed(
       if (!tonieId) continue;
       const productUrl = p.link || p.url || "";
       if (!productUrl.startsWith("https://tonies.com/de-de/tonies/")) continue;
+      const existing = await ProductModel.findOne({ tonieId });
+      if (existing) continue; // Produkt existiert schon, überspringen
       await ProductModel.updateOne(
         { tonieId },
         {

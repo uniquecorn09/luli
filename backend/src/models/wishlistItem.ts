@@ -5,6 +5,7 @@ export interface IWishlistItem extends Document {
   addedAt: Date;
   purchasedAt?: Date;
   purchasedBy?: string;
+  proposed?: boolean;
 }
 
 const WishlistItemSchema = new Schema<IWishlistItem>(
@@ -13,6 +14,7 @@ const WishlistItemSchema = new Schema<IWishlistItem>(
     addedAt: { type: Date, default: Date.now },
     purchasedAt: Date,
     purchasedBy: String,
+    proposed: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

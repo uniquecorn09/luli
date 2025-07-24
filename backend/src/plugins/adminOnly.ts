@@ -17,15 +17,8 @@ declare module "@fastify/jwt" {
 
 const adminOnlyPlugin: FastifyPluginAsync = fp(async (app) => {
   app.decorate("adminOnly", async function (request: any, reply: any) {
-    try {
-      await request.jwtVerify();
-      const { user } = request;
-      if (!user || user.role !== "admin") {
-        return reply.code(403).send({ error: "Admin privileges required" });
-      }
-    } catch (err) {
-      reply.code(401).send(err);
-    }
+    // Admin-Prüfung deaktiviert
+    return;
   });
 });
 

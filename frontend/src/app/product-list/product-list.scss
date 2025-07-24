@@ -1,0 +1,123 @@
+.product-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  padding: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1200px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 1200px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.product-card {
+  background: #f6fff8;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 12px rgba(35, 64, 44, 0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  color: #23402c;
+  min-height: 440px;
+  transition: box-shadow 0.2s;
+}
+.product-card:hover {
+  box-shadow: 0 4px 24px rgba(35, 64, 44, 0.18);
+}
+
+.product-image {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  margin-bottom: 1.2rem;
+}
+
+.product-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.7rem;
+  text-align: center;
+}
+
+.product-price, .product-availability {
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.product-actions {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7em;
+}
+
+button, .mat-stroked-button {
+  border-radius: 0px !important;
+  min-width: 130px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.5em 1.2em;
+  box-shadow: none;
+  border: none;
+  transition: background 0.2s, color 0.2s;
+  height: 30px;
+}
+
+.mat-accent, .accent, .mat-primary {
+  background: #014023 !important; /* sanftes Orange */
+  color: #F5FED7 !important;
+}
+.mat-warn, .warn {
+  background: #e57373 !important;
+  color: #fff !important;
+}
+button[disabled], .mat-stroked-button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wishlist-flag, .owned-flag, .proposed-flag, .pending-flag {
+  background: #b7e4c7;
+  color: #23402c;
+  border-radius: 0.7em;
+  font-size: 0.9em;
+  font-weight: bold;
+  padding: 0.15em 0.7em;
+  margin-left: 0.5em;
+}
+.proposed-flag { background: #ffe066; color: #23402c; }
+.pending-flag { background: #b2dfdb; color: #23402c; }
+
+body {
+  background: linear-gradient(120deg, #eaf7ef 0%, #f6fff8 100%);
+}
+
+input {
+  border-radius: 0px;
+  padding: 0.5em 1em;
+  border: 1px solid #ccc;
+  width: 250px;
+  margin-right: 0.5em;
+  height: 30px;
+  margin-top: 10px;
+}   

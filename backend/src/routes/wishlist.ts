@@ -15,9 +15,6 @@ const wishlistRoutes: FastifyPluginAsync = async (app) => {
   // Admin add/remove
   app.post<{ Params: { tonieId: string }; Body: AddRemoveBody }>(
     "/wishlist/:tonieId",
-    {
-      preHandler: [app.authenticate, app.adminOnly],
-    },
     async (request, reply) => {
       const { tonieId } = request.params;
       const { action } = request.body;
@@ -55,7 +52,7 @@ const wishlistRoutes: FastifyPluginAsync = async (app) => {
       });
       if (existing) return { status: "already_in_wishlist" };
 
-      await WishlistItemModel.create({ product: product._id });
+      await WishlistItemModel.create({ product: product._id, proposed: true });
       return { status: "proposed" };
     }
   );
@@ -72,6 +69,36 @@ const wishlistRoutes: FastifyPluginAsync = async (app) => {
       item.purchasedAt = new Date();
       await item.save();
       return { status: "marked_purchased" };
+    }
+  );
+
+  // Vorschlag annehmen
+  app.patch<{ Params: { id: string } }>(
+    "/wishlist/:id/accept",
+    async (request, reply) => {
+      const { id } = request.params;
+      const item = await WishlistItemModel.findByIdAndUpdate(
+        id,
+        { proposed: false },
+        { new: true }
+      )
+        .populate("product")
+        .lean();
+      if (!item)
+        return reply.code(404).send({ error: "Wishlist item not found" });
+      return { status: "accepted", item };
+    }
+  );
+
+  // Vorschlag ablehnen/entfernen
+  app.delete<{ Params: { id: string } }>(
+    "/wishlist/:id",
+    async (request, reply) => {
+      const { id } = request.params;
+      const result = await WishlistItemModel.findByIdAndDelete(id);
+      if (!result)
+        return reply.code(404).send({ error: "Wishlist item not found" });
+      return { status: "deleted" };
     }
   );
 };

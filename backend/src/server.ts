@@ -8,6 +8,7 @@ import productsRoute from "./routes/products";
 import wishlistRoutes from "./routes/wishlist";
 import ownedRoutes from "./routes/owned";
 import settingsRoutes from "./routes/settings";
+import cors from "@fastify/cors";
 
 // Load environment variables from .env (if present)
 dotenv.config();
@@ -32,6 +33,10 @@ async function startServer() {
   // Register plugins
   app.register(jwtPlugin);
   app.register(adminOnlyPlugin);
+  await app.register(cors, {
+    origin: "http://localhost:4200", // or true for all origins (dev only)
+    credentials: true,
+  });
 
   // Register routes
   app.register(authRoutes, { prefix: "/auth" });

@@ -1,0 +1,70 @@
+<div *ngIf="loading" class="loading">Lade Wunschliste...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div class="product-grid" *ngIf="!loading && !error">
+  <div class="product-card" *ngFor="let product of products">
+    <img
+      class="product-image"
+      [src]="product.imageUrl"
+      [alt]="product.name"
+      *ngIf="product.imageUrl"
+    />
+    <div class="product-title">
+      <a
+        [href]="product.productUrl"
+        target="_blank"
+        rel="noopener"
+        class="product-link"
+      >
+        {{ product.name }}
+        <span class="link-icon" aria-label="Produktseite öffnen"></span>
+      </a>
+      <div *ngIf="product.proposed" class="proposed-flag">vorgeschlagen</div>
+    </div>
+    <div class="product-price">Preis: {{ product.price }}</div>
+    <div class="product-availability">
+      Verfügbarkeit:
+      {{
+        product.availability === "in_stock"
+          ? "Auf Lager"
+          : product.availability === "out_of_stock"
+          ? "Nicht verfügbar"
+          : "Unbekannt"
+      }}
+    </div>
+    <div class="product-actions">
+      <button
+        mat-stroked-button
+        color="primary"
+        *ngIf="product.proposed && isLoggedIn()"
+        (click)="acceptProposal(product._id!)"
+      >
+        Annehmen
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        *ngIf="product.proposed && isLoggedIn()"
+        (click)="rejectProposal(product._id!)"
+      >
+        Ablehnen
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        *ngIf="!product.proposed"
+        (click)="markPurchased(product.tonieId)"
+      >
+        Als gekauft markieren
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        *ngIf="!product.proposed && isLoggedIn()"
+        (click)="removeFromWishlist(product.tonieId)"
+      >
+        Aus Wunschliste entfernen
+      </button>
+    </div>
+  </div>
+</div>

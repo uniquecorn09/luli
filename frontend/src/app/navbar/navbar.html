@@ -1,0 +1,15 @@
+<mat-toolbar color="primary" class="navbar">
+  <span class="nav-links">
+    <a mat-button routerLink="/">Alle Tonies</a>
+    <a mat-button routerLink="/wishlist">Wunschliste</a>
+    <a mat-button routerLink="/owned">Hab ich schon!</a>
+  </span>
+  <span class="spacer"></span>
+  <a
+    mat-button
+    routerLink="/profile"
+    *ngIf="auth.isLoggedIn()"
+    style="margin-left: auto"
+    >Profil</a
+  >
+</mat-toolbar>
