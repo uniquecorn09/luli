@@ -45,6 +45,7 @@ backend/node_modules/
 backend/dist/
 backend/build/
 backend/coverage/
+backend/public/
 
 # Ignore test output
 backend/tests/tmp/ 
