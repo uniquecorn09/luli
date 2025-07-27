@@ -9,12 +9,14 @@ import wishlistRoutes from "./routes/wishlist";
 import ownedRoutes from "./routes/owned";
 import settingsRoutes from "./routes/settings";
 import cors from "@fastify/cors";
+import fastifyStatic from "@fastify/static";
+import path from "path";
 
 // Load environment variables from .env (if present)
 dotenv.config();
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
-const MONGO_URI = process.env.MONGO_URI ?? "mongodb://localhost:27017/luli";
+const MONGO_URI = process.env.MONGODB_URI ?? "mongodb://localhost:27017/luli";
 
 async function startServer() {
   const app = Fastify({ logger: true });
@@ -36,6 +38,13 @@ async function startServer() {
   await app.register(cors, {
     origin: "http://localhost:4200", // or true for all origins (dev only)
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  });
+
+  // Statische Dateien für das Frontend ausliefern
+  await app.register(fastifyStatic, {
+    root: path.join(__dirname, "../public"),
+    prefix: "/",
   });
 
   // Register routes
@@ -44,6 +53,12 @@ async function startServer() {
   app.register(wishlistRoutes);
   app.register(ownedRoutes);
   app.register(settingsRoutes);
+
+  // SPA-Fallback für Angular-Routing
+  app.setNotFoundHandler((request, reply) => {
+    reply.type("text/html");
+    reply.sendFile("index.html");
+  });
 
   // Connect to MongoDB
   try {

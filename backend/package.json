@@ -10,18 +10,20 @@
         "lint": "eslint \"src/**/*.ts\" --max-warnings=0",
         "format": "prettier --write \"src/**/*.ts\"",
         "test": "jest --runInBand --detectOpenHandles",
-        "import-feed": "FEED_URL=https://api.prod.shop.tonies.com/api/product-feed?shopLocale=de_DE ts-node src/cli/import-feed.ts"
+        "import-feed": "FEED_URL=https://api.prod.shop.tonies.com/api/product-feed?shopLocale=de_DE ts-node src/cli/import-feed.ts",
+        "start:docker": "NODE_ENV=production node src/server.js"
     },
     "keywords": [],
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@fastify/cors": "^8.0.0",
-        "@fastify/jwt": "^8.0.0",
+        "@fastify/cors": "^11.0.1",
+        "@fastify/jwt": "^9.1.0",
+        "@fastify/static": "^8.2.0",
         "axios": "^1.6.8",
         "bcryptjs": "^2.4.3",
         "dotenv": "^16.4.1",
-        "fastify": "^4.24.0",
+        "fastify": "^5.4.0",
         "fastify-plugin": "^5.0.0",
         "mongodb": "^6.4.0",
         "mongoose": "^8.0.3"
