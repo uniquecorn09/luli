@@ -13,6 +13,14 @@
     style="margin-left: auto"
     >Profil</a
   >
+  <a
+    mat-button
+    routerLink="/login"
+    *ngIf="!auth.isLoggedIn()"
+    class="desktop-only"
+    style="margin-left: auto"
+    >Login</a
+  >
   <!-- Menüicon für Mobil -->
   <button mat-icon-button class="mobile-only" (click)="toggleMenu()">
     <mat-icon>{{ menuOpen ? "close" : "menu" }}</mat-icon>
