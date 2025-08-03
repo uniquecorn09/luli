@@ -36,14 +36,26 @@ async function startServer() {
   app.register(jwtPlugin);
   app.register(adminOnlyPlugin);
   await app.register(cors, {
-    origin: "http://localhost:4200", // or true for all origins (dev only)
+    origin: (origin, cb) => {
+      const allowed = [
+        "http://localhost:3000",
+        "http://climborius.de:3000",
+        "http://pupsmaschine.de:3000",
+        "http://localhost:4200",
+      ];
+      if (!origin || allowed.includes(origin)) {
+        cb(null, true);
+      } else {
+        cb(new Error("Not allowed by CORS"), false);
+      }
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   });
 
   // Statische Dateien für das Frontend ausliefern
   await app.register(fastifyStatic, {
-    root: path.join(__dirname, "../public"),
+    root: path.join(__dirname, "../../public"), // <- eine Ebene höher!
     prefix: "/",
   });
 
