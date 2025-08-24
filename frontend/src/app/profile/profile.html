@@ -4,6 +4,7 @@
     padding: var(--space-4);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
+    margin: 20px;
   "
 >
   <div class="profile-card-header">
@@ -11,13 +12,9 @@
     <p style="margin: 0">Hi Lucy!</p>
   </div>
   <div class="profile-actions">
-    <button
-      mat-raised-button
-      color="warn"
-      (click)="logout()"
-      class="logout-button"
-    >
+    <button mat-stroked-button color="primary" (click)="logout()">
       Logout
     </button>
+    <button mat-stroked-button color="primary">Update Feed</button>
   </div>
 </div>

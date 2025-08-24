@@ -11,17 +11,6 @@
       *ngIf="item.product.imageUrl"
     />
     <div class="product-title">{{ item.product.name }}</div>
-    <div class="product-price">Preis: {{ item.product.price }}</div>
-    <div class="product-availability">
-      Verfügbarkeit:
-      {{
-        item.product.availability === "in_stock"
-          ? "Auf Lager"
-          : item.product.availability === "out_of_stock"
-          ? "Nicht verfügbar"
-          : "Unbekannt"
-      }}
-    </div>
     <div class="product-actions">
       <button
         mat-stroked-button

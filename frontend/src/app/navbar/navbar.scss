@@ -56,6 +56,12 @@ input {
     align-items: center;
   }
   /* Dark navbar background on mobile to match desktop */
+  .nav-title {
+    font-family: "Delicious Handrawn", cursive;
+    font-weight: 400;
+    font-size: 2rem;
+    margin-left: 1rem;
+  }
   .navbar {
     background: rgba(15, 61, 46, 0.95) !important;
     color: #ffffff !important;

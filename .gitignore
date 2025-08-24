@@ -46,7 +46,7 @@ backend/dist/
 backend/build/
 backend/coverage/
 backend/public/
-backeng/package-lock.json
+backend/package-lock.json
 
 # Ignore test output
 backend/tests/tmp/ 
