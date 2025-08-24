@@ -1,0 +1,143 @@
+
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;600;700&display=swap');
+
+:root {
+  /* Forest theme palette - soft, muted tones */
+  --color-bg: #0f3d2e;            /* deep pine */
+  --color-bg-2: #114433;          /* slightly lighter pine */
+  --color-surface: #e6f1e9;       /* misty moss */
+  --color-surface-2: #f3f8f4;     /* clouded light */
+  --color-primary: #2c7a4b;       /* fern */
+  --color-primary-strong: #1d5c38;/* deeper fern */
+  --color-accent: #a3d9a5;        /* tender leaf */
+  --color-warn: #f2b880;          /* warm bark */
+  --color-text: #0f2a20;          /* forest ink */
+  --color-text-muted: #3c5b4c;    /* muted foliage */
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --shadow-sm: 0 2px 8px rgba(15, 45, 33, 0.12);
+  --shadow-md: 0 8px 24px rgba(15, 45, 33, 0.16);
+}
+
+html, body, button, input, select, textarea, .mat-button, .mat-stroked-button, .mat-raised-button, .mat-flat-button {
+  font-family: 'IBM Plex Sans Condensed', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif !important;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(160deg, var(--color-bg) 0%, var(--color-bg-2) 100%);
+  color: var(--color-text);
+}
+
+/* Containers */
+.app-container,
+.container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4);
+}
+
+/* Links */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-primary-strong);
+  text-decoration: underline;
+}
+
+/* Cards / Surfaces */
+.product-card, .kachel, .card, .surface {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-4);
+}
+
+/* Buttons */
+button, .mat-stroked-button, .mat-raised-button, .mat-flat-button {
+  background: var(--color-primary) !important;
+  color: #ffffff !important;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.55em 1.1em;
+  border: none;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+button:hover, .mat-stroked-button:hover, .mat-raised-button:hover, .mat-flat-button:hover {
+  background: var(--color-primary-strong) !important;
+}
+button:active, .mat-stroked-button:active, .mat-raised-button:active, .mat-flat-button:active {
+  transform: translateY(1px);
+}
+button[disabled], .mat-stroked-button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Badges / Flags */
+.wishlist-flag, .owned-flag, .proposed-flag, .pending-flag, .status-label {
+  background: var(--color-warn) !important;
+  color: var(--color-text) !important;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.2em 0.7em;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  html, body, app-root {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+  }
+  .product-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 100vw;
+    padding: var(--space-2);
+    margin: 0;
+  }
+  .product-card, .kachel, .card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 0 var(--space-4) 0 !important;
+  }
+}
+
+/* Navbar defaults moved here to share theme variables */
+.navbar, .navigation, nav {
+  background: rgba(230, 241, 233, 0.08) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(163, 217, 165, 0.25);
+  color: #ffffff !important;
+}
+.navbar a, .navigation a, nav a {
+  color: #ffffff !important;
+}

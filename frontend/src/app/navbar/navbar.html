@@ -1,0 +1,81 @@
+<mat-toolbar color="primary" class="navbar">
+  <span class="nav-links desktop-only">
+    <a mat-button routerLink="/" routerLinkActive="active">Wunschliste</a>
+    <a
+      mat-button
+      routerLink="/products"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Alle Tonies</a
+    >
+    <a mat-button routerLink="/owned" routerLinkActive="active"
+      >Hab ich schon!</a
+    >
+  </span>
+  <span class="spacer"></span>
+  <a
+    mat-button
+    routerLink="/profile"
+    routerLinkActive="active"
+    *ngIf="auth.isLoggedIn()"
+    class="desktop-only"
+    style="margin-left: auto"
+    >Profil</a
+  >
+  <a
+    mat-button
+    routerLink="/login"
+    routerLinkActive="active"
+    *ngIf="!auth.isLoggedIn()"
+    class="desktop-only"
+    style="margin-left: auto"
+    >Login</a
+  >
+  <!-- Menüicon für Mobil -->
+  <button mat-icon-button class="mobile-only" (click)="toggleMenu()">
+    <mat-icon>{{ menuOpen ? "close" : "menu" }}</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- Mobiles Menü -->
+<div class="mobile-menu" *ngIf="menuOpen">
+  <a
+    mat-button
+    routerLink="/products"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    (click)="toggleMenu()"
+    >Alle Tonies</a
+  >
+  <div class="menu-separator"></div>
+  <a mat-button routerLink="/" routerLinkActive="active" (click)="toggleMenu()"
+    >Wunschliste</a
+  >
+  <div class="menu-separator"></div>
+  <a
+    mat-button
+    routerLink="/owned"
+    routerLinkActive="active"
+    (click)="toggleMenu()"
+    >Hab ich schon!</a
+  >
+  <div
+    class="menu-separator"
+    *ngIf="auth.isLoggedIn() || !auth.isLoggedIn()"
+  ></div>
+  <a
+    mat-button
+    routerLink="/profile"
+    routerLinkActive="active"
+    *ngIf="auth.isLoggedIn()"
+    (click)="toggleMenu()"
+    >Profil</a
+  >
+  <a
+    mat-button
+    routerLink="/login"
+    routerLinkActive="active"
+    *ngIf="!auth.isLoggedIn()"
+    (click)="toggleMenu()"
+    >Login</a
+  >
+</div>

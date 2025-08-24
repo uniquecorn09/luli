@@ -1,0 +1,23 @@
+<div
+  class="surface"
+  style="
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  "
+>
+  <div class="profile-card-header">
+    <img class="profile-avatar" [src]="profileImageUrl" alt="Profilbild" />
+    <p style="margin: 0">Hi Lucy!</p>
+  </div>
+  <div class="profile-actions">
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="logout()"
+      class="logout-button"
+    >
+      Logout
+    </button>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+.profile-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+.profile-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid rgba(15, 45, 33, 0.12);
+}
+
+.profile-actions {
+  margin-top: var(--space-4);
+  display: flex;
+  justify-content: center;
+}
+
+.logout-button {
+  width: 100%;
+  max-width: 200px;
+}

@@ -1,0 +1,44 @@
+<div *ngIf="loading" class="loading">Lade Besitz-Liste...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div class="product-grid" *ngIf="!loading && !error">
+  <div class="product-card" *ngFor="let item of items">
+    <div *ngIf="item.pending" class="pending-flag">Trifft bald ein</div>
+    <img
+      class="product-image"
+      [src]="item.product.imageUrl"
+      [alt]="item.product.name"
+      *ngIf="item.product.imageUrl"
+    />
+    <div class="product-title">{{ item.product.name }}</div>
+    <div class="product-price">Preis: {{ item.product.price }}</div>
+    <div class="product-availability">
+      Verfügbarkeit:
+      {{
+        item.product.availability === "in_stock"
+          ? "Auf Lager"
+          : item.product.availability === "out_of_stock"
+          ? "Nicht verfügbar"
+          : "Unbekannt"
+      }}
+    </div>
+    <div class="product-actions">
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="removeOwned(item.product.tonieId)"
+        *ngIf="isLoggedIn()"
+      >
+        Entfernen
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="setNotPending(item.product.tonieId)"
+        *ngIf="item.pending"
+      >
+        Im Besitz
+      </button>
+    </div>
+  </div>
+</div>

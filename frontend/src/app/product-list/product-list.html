@@ -1,0 +1,115 @@
+<div class="search-bar" style="margin-bottom: 1.5rem; text-align: center">
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    (keyup.enter)="onSearch()"
+    placeholder="Tonie suchen..."
+  />
+  <button mat-stroked-button color="primary" (click)="onSearch()">
+    Suchen
+  </button>
+</div>
+<div *ngIf="loading" class="loading">Lade Produkte...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div class="product-grid" *ngIf="!loading && !error">
+  <div class="product-card" *ngFor="let product of products">
+    <div class="product-image-box">
+      <img
+        class="product-image"
+        [src]="product.imageUrl"
+        [alt]="product.name"
+        *ngIf="product.imageUrl"
+      />
+    </div>
+    <div class="product-title">
+      {{ product.name }}
+      <div *ngIf="isOnWishlist(product.tonieId)" class="wishlist-flag">
+        bereits auf Wunschliste
+      </div>
+      <div *ngIf="isOwned(product.tonieId)" class="owned-flag">
+        hab ich schon
+      </div>
+    </div>
+    <div class="product-price">Preis: {{ product.price }}</div>
+    <div class="product-availability">
+      Verfügbarkeit:
+      {{
+        product.availability === "in_stock"
+          ? "Auf Lager"
+          : product.availability === "out_of_stock"
+          ? "Nicht verfügbar"
+          : "Unbekannt"
+      }}
+    </div>
+    <div style="margin-bottom: 0.5em">
+      <a
+        [href]="product.productUrl"
+        target="_blank"
+        rel="noopener"
+        class="product-link"
+      >
+        Zu Produkt ↗
+      </a>
+    </div>
+    <div class="product-actions">
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="addToWishlist(product.tonieId)"
+        *ngIf="isLoggedIn()"
+      >
+        Zur Wunschliste hinzufügen
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="proposeWishlist(product.tonieId)"
+        *ngIf="!isLoggedIn()"
+      >
+        Für Wunschliste vorschlagen
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="markPurchased(product.tonieId)"
+        *ngIf="isLoggedIn()"
+      >
+        Hab ich schon
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-footer" *ngIf="!loading && !error && totalPages > 1">
+  <button
+    mat-button
+    (click)="prevPage()"
+    [disabled]="currentPage === 1"
+    aria-label="Zurück"
+  >
+    <span class="label-text">Zurück</span>
+    <span class="label-icon" aria-hidden="true">&lt;</span>
+  </button>
+  <span style="margin: 0 1em"
+    >Seite
+    <select [(ngModel)]="currentPage" (change)="onPageSelect($event)">
+      <option
+        *ngFor="let p of [].constructor(totalPages); let i = index"
+        [value]="i + 1"
+      >
+        {{ i + 1 }}
+      </option>
+    </select>
+    von {{ totalPages }}
+  </span>
+  <button
+    mat-button
+    (click)="nextPage()"
+    [disabled]="currentPage === totalPages"
+    aria-label="Weiter"
+  >
+    <span class="label-text">Weiter</span>
+    <span class="label-icon" aria-hidden="true">&gt;</span>
+  </button>
+</div>
