@@ -41,7 +41,7 @@
   <button mat-icon-button class="mobile-only" (click)="toggleMenu()">
     <mat-icon>{{ menuOpen ? "close" : "menu" }}</mat-icon>
   </button>
-  <span class="nav-title mobile-only">Lucies Tonies</span>
+  <span class="nav-title mobile-only">{{ mobileTitle }}</span>
 </mat-toolbar>
 <!-- Mobiles Menü -->
 <div class="mobile-menu" *ngIf="menuOpen">

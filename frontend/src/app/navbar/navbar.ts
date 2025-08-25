@@ -23,6 +23,16 @@ export class Navbar {
   menuOpen = false;
   constructor(public auth: AuthService, private router: Router) {}
 
+  get mobileTitle(): string {
+    const path = this.router.url.split('?')[0];
+    if (path === '/' || path === '') return 'Wunschliste';
+    if (path.startsWith('/products')) return 'Alle Tonies';
+    if (path.startsWith('/owned')) return 'Hab ich schon';
+    if (path.startsWith('/profile')) return 'Profil';
+    if (path.startsWith('/login')) return 'Login';
+    return 'Lucies Tonies';
+  }
+
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
