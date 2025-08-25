@@ -3,14 +3,24 @@
 set -e  # Stoppe bei Fehlern
 
 # ------------------------------
-# 1. Pfade definieren
+# 0. Pfade definieren
 # ------------------------------
 FRONTEND_DIR=~/luli/frontend
 BACKEND_DIR=~/luli/backend
 DEPLOY_DIR=/var/www/meine-tonies
+INDEX_DIR=/var/www/pupsmaschine
 PM2_NAME=server
 
 echo "🚀 LuLi Deployment gestartet..."
+
+# ------------------------------
+# 1. Index
+# ------------------------------
+
+sudo rm -rf $INDEX_DIR
+sudo mkdir -p $INDEX_DIR
+echo "📁 Kopiere Index nach nginx..."
+sudo cp index.html assets $INDEX_DIR
 
 # ------------------------------
 # 2. Frontend Build
@@ -23,6 +33,7 @@ npm run build:prod
 echo "🧹 Lösche altes Frontend im nginx-Verzeichnis..."
 sudo rm -rf $DEPLOY_DIR
 sudo mkdir -p $DEPLOY_DIR
+
 
 echo "📁 Kopiere neues Frontend nach nginx..."
 sudo cp -r dist/*/browser/* $DEPLOY_DIR
