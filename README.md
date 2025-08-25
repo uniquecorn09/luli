@@ -14,15 +14,25 @@ npm run dev
 
 ## 🔧 TODO
 
+### 🎨 UI
+- [ ] Buttons bei schon vorhanden anpassen
+- [ ] Alignment
+- [ ] Suchleiste Felder neben einander
+- [ ] Kacheln kleiner
+- [ ] Buttons gleich groß
+- [ ] Footer über Buttons
+- [ ] Title auf Mobile statt "Lucy's Tonies"
+- [ ] Suche automatisch submitten
+
 ### 🔐 Authentication & Security
 - [ ] **Backend Auth aktivieren**: Auth-Routen im Backend sichern
 - [ ] **Frontend Auth Interceptor**: Bearer Token automatisch setzen
 - [ ] **JWT Token Handling**: Token-Validierung und Refresh implementieren
 
 ### 🌐 Server & Deployment
-- [ ] **Nginx Konfiguration**: Subdomain `meinetonies.pupsmaschine.de` einrichten
-- [ ] **Hetzner Server Setup**: Domain-Konfiguration anpassen
-- [ ] **SSL Certificate**: HTTPS für Subdomain konfigurieren
+- [x] **Nginx Konfiguration**: Subdomain `meinetonies.pupsmaschine.de` einrichten
+- [x] **Hetzner Server Setup**: Domain-Konfiguration anpassen
+- [x] **SSL Certificate**: HTTPS für Subdomain konfigurieren
 
 ## 📊 DB Interactions
 

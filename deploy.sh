@@ -7,7 +7,7 @@ set -e  # Stoppe bei Fehlern
 # ------------------------------
 FRONTEND_DIR=~/luli/frontend
 BACKEND_DIR=~/luli/backend
-DEPLOY_DIR=/var/www/frontend
+DEPLOY_DIR=/var/www/meine-tonies
 PM2_NAME=server
 
 echo "🚀 LuLi Deployment gestartet..."
